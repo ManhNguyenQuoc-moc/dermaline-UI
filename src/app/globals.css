@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Hanken+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Dermaline Semantic Color Tokens */
+  --color-brand-primary: #58B9E7;
+  --color-brand-secondary: #0F172A;
+  --color-brand-tertiary: #64748B;
+  --color-brand-neutral: #F8FAFC;
+  --color-brand-primary-hover: #38A5DC;
+  --color-brand-primary-alpha: rgba(88, 185, 231, 0.15);
+
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-text-muted: #94A3B8;
+
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8FAFC;
+  --color-bg-surface: #F1F5F9;
+  --color-bg-footer: #0F172A;
+
+  --color-border-default: #E2E8F0;
+  --color-border-subtle: #CBD5E1;
+
+  /* Typography System */
+  --font-headline: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Manrope', sans-serif;
+  --font-label: 'Hanken Grotesk', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif-soft: 'Cormorant Garamond', Georgia, serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Utility Classes for Luxury Serif Typography */
+.font-serif-soft {
+  font-family: var(--font-serif-soft);
+}
+
+.font-serif-display {
+  font-family: var(--font-serif);
+}
+
+/* Antd override helper styles if needed */
+.ant-btn-primary {
+  background-color: var(--color-brand-primary) !important;
+  border-color: var(--color-brand-primary) !important;
+}
+
+.ant-btn-primary:hover {
+  background-color: var(--color-brand-primary-hover) !important;
+  border-color: var(--color-brand-primary-hover) !important;
+}
