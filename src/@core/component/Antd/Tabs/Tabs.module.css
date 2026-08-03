@@ -1,0 +1,23 @@
+.gTabs {
+  width: 100%;
+}
+
+.gTabs :global(.ant-tabs-nav) {
+  margin-bottom: 2rem !important;
+}
+
+.gTabs :global(.ant-tabs-tab-btn) {
+  font-family: var(--font-label, sans-serif) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.gTabs :global(.ant-tabs-tab-active .ant-tabs-tab-btn) {
+  color: var(--brand-primary, #0ea5e9) !important;
+}
+
+.gTabs :global(.ant-tabs-ink-bar) {
+  background-color: var(--brand-primary, #0ea5e9) !important;
+}

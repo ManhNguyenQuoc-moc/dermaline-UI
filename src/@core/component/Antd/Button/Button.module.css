@@ -1,0 +1,19 @@
+.gButton {
+  font-family: var(--font-label, sans-serif);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.gButtonPrimary {
+  background-color: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+.gButtonPrimary:hover {
+  background-color: var(--brand-primary, #0ea5e9);
+  border-color: var(--brand-primary, #0ea5e9);
+}

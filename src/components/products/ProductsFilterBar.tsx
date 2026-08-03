@@ -2,6 +2,7 @@
 
 import React from 'react';
 import GSelect from '@/@core/component/Antd/Select';
+import { useTranslation } from '@/i18n/useTranslation';
 
 interface ProductsFilterBarProps {
   searchQuery: string;
@@ -44,30 +45,32 @@ export default function ProductsFilterBar({
   concerns,
   priceRanges,
 }: ProductsFilterBarProps) {
+  const { t } = useTranslation();
+
   // Concern Options for Ant Design GSelect
   const concernOptions = concerns.map((c) => ({
     value: c,
-    label: c === 'All' ? 'Skin Concern: All' : c,
+    label: c === 'All' ? t.filters.allCategories : c,
   }));
 
   // Line Options for Ant Design GSelect
   const lineOptions = lines.map((l) => ({
     value: l,
-    label: l === 'All' ? 'Line: All' : l,
+    label: l === 'All' ? t.filters.allCategories : l,
   }));
 
   // Price Options for Ant Design GSelect
   const priceOptions = priceRanges.map((p) => ({
     value: p,
-    label: p === 'All' ? 'Price: All' : p,
+    label: p === 'All' ? t.filters.allPrices : p,
   }));
 
   // Sort Options for Ant Design GSelect
   const sortOptions = [
-    { value: 'featured', label: 'SORT: FEATURED' },
-    { value: 'price-low', label: 'PRICE: LOW TO HIGH' },
-    { value: 'price-high', label: 'PRICE: HIGH TO LOW' },
-    { value: 'rating', label: 'HIGHEST RATED' },
+    { value: 'featured', label: t.filters.sortFeatured },
+    { value: 'price-low', label: t.filters.sortLowHigh },
+    { value: 'price-high', label: t.filters.sortHighLow },
+    { value: 'rating', label: t.filters.sortRating },
   ];
 
   return (
@@ -78,7 +81,7 @@ export default function ProductsFilterBar({
           <div className="relative flex-1 max-w-md">
             <input
               type="text"
-              placeholder="Search products by name or ingredient..."
+              placeholder={t.filters.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-11 px-4 text-xs sm:text-sm font-body border border-slate-300 focus:border-brand-primary focus:outline-none rounded-none sm:rounded-sm bg-slate-50/50 text-slate-900 transition-colors"
@@ -125,37 +128,20 @@ export default function ProductsFilterBar({
               value={sortBy}
               onChange={(val) => setSortBy(val as any)}
               options={sortOptions}
-              className="w-44 sm:w-48 [&_.ant-select-selection-item]:!text-brand-primary [&_.ant-select-selection-item]:!font-extrabold"
+              className="w-44 sm:w-48"
             />
 
+            {/* Reset Filters Button */}
             {hasActiveFilters && (
               <button
                 type="button"
                 onClick={resetAllFilters}
-                className="h-11 px-4 text-xs font-label font-bold text-red-600 hover:bg-red-50 border border-red-200 rounded-none sm:rounded-sm transition-colors uppercase tracking-wider cursor-pointer"
+                className="h-11 px-4 font-label text-xs font-bold text-slate-600 hover:text-brand-primary border border-slate-300 hover:border-brand-primary rounded-none sm:rounded-sm bg-white transition-colors cursor-pointer uppercase shrink-0"
               >
-                CLEAR ALL FILTERS
+                {t.filters.resetFilters}
               </button>
             )}
           </div>
-        </div>
-
-        {/* Category Tabs Row */}
-        <div className="flex items-center gap-2 overflow-x-auto pt-3 pb-1 no-scrollbar border-t border-slate-100 mt-3">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              type="button"
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-1.5 text-xs font-label font-bold uppercase tracking-wider whitespace-nowrap transition-all rounded-none sm:rounded-sm cursor-pointer ${
-                selectedCategory === cat
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
         </div>
       </div>
     </section>

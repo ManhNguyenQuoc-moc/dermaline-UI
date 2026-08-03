@@ -1,0 +1,23 @@
+.gForm {
+  width: 100%;
+}
+
+.gFormItem {
+  margin-bottom: 1rem;
+}
+
+.gFormItemLabel {
+  font-family: var(--font-label, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gFormItem :global(.ant-form-item-label > label) {
+  font-family: var(--font-label, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+}

@@ -1,0 +1,24 @@
+.gEmptyContainer {
+  padding: 4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gEmptyTitle {
+  font-family: var(--font-headline, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-top: 1rem;
+}
+
+.gEmptyDescription {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.5rem;
+  max-width: 32rem;
+}

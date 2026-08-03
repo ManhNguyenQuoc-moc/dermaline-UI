@@ -1,0 +1,35 @@
+.gInput {
+  height: 2.75rem;
+  border-radius: 0;
+  border-color: #cbd5e1;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.gInput:hover {
+  border-color: #94a3b8;
+}
+
+.gInput:focus,
+.gInputFocused {
+  border-color: var(--brand-primary, #0ea5e9);
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.15);
+}
+
+.gTextArea {
+  border-radius: 0;
+  border-color: #cbd5e1;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  padding: 0.75rem;
+}
+
+.gTextArea:hover {
+  border-color: #94a3b8;
+}
+
+.gTextArea:focus {
+  border-color: var(--brand-primary, #0ea5e9);
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.15);
+}

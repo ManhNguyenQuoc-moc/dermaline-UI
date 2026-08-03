@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ScrollReveal from '@/components/common/ScrollReveal';
+import ImageWithSkeleton from '@/components/common/ImageWithSkeleton';
 
 export interface TimelineMilestone {
   year: string;
@@ -101,7 +102,7 @@ export default function BrandTimelineSection() {
 
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center space-y-4 mb-20 sm:mb-28">
+        <div className="flex flex-col items-center text-center space-y-4 mb-16 sm:mb-24">
           <ScrollReveal variant="fade-up" delay={100} duration={850}>
             <span className="text-brand-primary text-xs sm:text-sm font-label font-bold tracking-[1.6px] uppercase block">
               15+ YEARS HERITAGE & EVOLUTION
@@ -124,105 +125,114 @@ export default function BrandTimelineSection() {
           </ScrollReveal>
         </div>
 
-        {/* Milestone Container with Clean 1px Translucent Spine Thread */}
+        {/* Milestone Container with Alternating Balanced Grid */}
         <div className="relative w-full">
-          {/* Delicate Translucent Thread Spine */}
-          <div className="absolute left-1/2 top-6 bottom-6 w-[1px] bg-gradient-to-b from-sky-200/30 via-brand-primary/30 to-sky-200/30 -translate-x-1/2 hidden lg:block pointer-events-none" />
+          {/* Central Spine Thread (Desktop) */}
+          <div className="absolute left-1/2 top-6 bottom-6 w-[1px] bg-gradient-to-b from-sky-200/40 via-brand-primary/30 to-sky-200/40 -translate-x-1/2 hidden lg:block pointer-events-none z-0" />
 
-          <div className="space-y-24 sm:space-y-32 relative z-20">
-            {MILESTONES.map((milestone) => (
-              <div
-                key={milestone.year}
-                className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center"
-              >
-                {/* Center Timeline Progress Ring Dot */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 hidden lg:flex items-center justify-center pointer-events-none">
-                  <div className="w-5 h-5 rounded-full bg-white border border-brand-primary/60 shadow-sm flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-brand-primary" />
-                  </div>
-                </div>
+          <div className="space-y-16 sm:space-y-24 relative z-10">
+            {MILESTONES.map((milestone, idx) => {
+              const isEven = idx % 2 === 0;
 
-                {/* Left Column (6 Cols): Milestone Information */}
-                <div className="lg:col-span-6 flex flex-col items-start space-y-5">
-                  <ScrollReveal variant="slide-left" delay={100} duration={850}>
-                    <div className="flex items-center gap-3">
-                      <span className="font-headline font-bold text-4xl sm:text-5xl text-brand-primary tracking-tight">
-                        {milestone.year}
-                      </span>
-                      <span className="px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-brand-primary text-xs font-label font-extrabold tracking-wider uppercase">
-                        {milestone.tag}
-                      </span>
+              return (
+                <div
+                  key={milestone.year}
+                  className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white/70 lg:bg-transparent border lg:border-none border-slate-200 p-6 lg:p-0 rounded-none sm:rounded-sm"
+                >
+                  {/* Center Dot Indicator (Desktop) */}
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden lg:flex items-center justify-center pointer-events-none">
+                    <div className="w-5 h-5 rounded-full bg-white border border-brand-primary/60 shadow-sm flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-brand-primary" />
                     </div>
-                  </ScrollReveal>
+                  </div>
 
-                  <ScrollReveal variant="slide-left" delay={220} duration={850}>
-                    <h3 className="font-headline font-semibold text-2xl sm:text-3xl text-slate-900 leading-snug">
-                      {milestone.title}
-                    </h3>
-                  </ScrollReveal>
-
-                  <ScrollReveal variant="slide-left" delay={340} duration={850}>
-                    <p className="font-body text-slate-600 text-base sm:text-lg leading-relaxed">
-                      {milestone.description}
-                    </p>
-                  </ScrollReveal>
-
-                  <ScrollReveal variant="slide-left" delay={460} duration={850}>
-                    <ul className="space-y-2.5 pt-2 border-t border-slate-100 w-full font-body text-sm text-slate-700 font-medium">
-                      {milestone.details.map((detail, dIdx) => (
-                        <li key={dIdx} className="flex items-center gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
-                          <span>{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </ScrollReveal>
-                </div>
-
-                {/* Right Column (6 Cols): Pure Minimalist 2026 Liquid Glass Image Showcase */}
-                <div className="lg:col-span-6 relative w-full flex justify-center">
-                  <ScrollReveal variant="slide-right" delay={200} duration={950}>
-                    <div className="relative w-full max-w-[500px] group">
-                      {/* Main Image Container */}
-                      <div className="relative rounded-tl-3xl rounded-tr-[72px] sm:rounded-tr-[88px] rounded-br-3xl rounded-bl-[72px] sm:rounded-bl-[88px] overflow-hidden shadow-[0px_30px_70px_-15px_rgba(14,165,233,0.18)] bg-white border border-sky-100 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3]">
-                        <img
-                          src={milestone.image}
-                          alt={milestone.title}
-                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000 ease-out"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-slate-950/10 to-transparent z-10" />
-
-                        {/* Top Holographic Hologram Badge (Pure Text, No Pulsing Dot) */}
-                        <div className="absolute top-5 left-6 z-20 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/80 text-brand-primary text-[11px] font-label font-bold tracking-widest uppercase shadow-md">
-                          <span>{milestone.tag}</span>
-                        </div>
-
-                        {/* Top Metric Counter Pill */}
-                        <div className="absolute top-5 right-6 z-20 bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-white text-[11px] font-headline font-bold tracking-wide flex items-center gap-1.5 shadow-md">
-                          <span className="text-sky-300 font-extrabold">{milestone.metricValue}</span>
-                          <span className="text-[9px] text-slate-300 uppercase tracking-wider font-label">{milestone.metricLabel}</span>
-                        </div>
+                  {/* Information Content (Left on even, Right on odd) */}
+                  <div
+                    className={`lg:col-span-6 flex flex-col items-start space-y-4 ${
+                      isEven ? 'lg:order-1 lg:pr-10' : 'lg:order-2 lg:pl-10'
+                    }`}
+                  >
+                    <ScrollReveal variant={isEven ? 'slide-left' : 'slide-right'} delay={100} duration={850}>
+                      <div className="flex items-center gap-3">
+                        <span className="font-headline font-bold text-4xl sm:text-5xl text-brand-primary tracking-tight">
+                          {milestone.year}
+                        </span>
+                        <span className="px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-brand-primary text-xs font-label font-extrabold tracking-wider uppercase">
+                          {milestone.tag}
+                        </span>
                       </div>
+                    </ScrollReveal>
 
-                      {/* Pure Text 2026 Liquid Glass Capsule Bar (No Pulsing Dot) */}
-                      <div className="absolute -bottom-6 inset-x-4 sm:inset-x-6 z-20">
-                        <div className="bg-white/95 backdrop-blur-xl border border-sky-200/80 rounded-full shadow-[0px_20px_45px_rgba(14,165,233,0.12)] px-6 py-3.5 flex items-center justify-between transition-all duration-500 group-hover:shadow-3xl group-hover:border-brand-primary/80">
-                          <span className="font-label font-extrabold text-xs sm:text-sm text-slate-900 tracking-wider uppercase truncate">
-                            {milestone.floatingText}
-                          </span>
+                    <ScrollReveal variant={isEven ? 'slide-left' : 'slide-right'} delay={200} duration={850}>
+                      <h3 className="font-headline font-semibold text-xl sm:text-2xl lg:text-3xl text-slate-900 leading-snug">
+                        {milestone.title}
+                      </h3>
+                    </ScrollReveal>
 
-                          <div className="hidden sm:flex items-center gap-2 pl-4 border-l border-slate-200/80">
-                            <span className="font-label text-[10px] font-bold text-brand-primary uppercase tracking-widest">
+                    <ScrollReveal variant={isEven ? 'slide-left' : 'slide-right'} delay={300} duration={850}>
+                      <p className="font-body text-slate-600 text-sm sm:text-base leading-relaxed">
+                        {milestone.description}
+                      </p>
+                    </ScrollReveal>
+
+                    <ScrollReveal variant={isEven ? 'slide-left' : 'slide-right'} delay={400} duration={850}>
+                      <ul className="space-y-2 pt-2 border-t border-slate-100 w-full font-body text-xs sm:text-sm text-slate-700 font-medium">
+                        {milestone.details.map((detail, dIdx) => (
+                          <li key={dIdx} className="flex items-center gap-2.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </ScrollReveal>
+                  </div>
+
+                  {/* Showcase Image (Right on even, Left on odd) */}
+                  <div
+                    className={`lg:col-span-6 w-full relative ${
+                      isEven ? 'lg:order-2 lg:pl-4' : 'lg:order-1 lg:pr-4'
+                    }`}
+                  >
+                    <ScrollReveal variant={isEven ? 'slide-right' : 'slide-left'} delay={200} duration={950}>
+                      <div className="relative w-full max-w-lg mx-auto group">
+                        {/* Main Image Container */}
+                        <div className="relative rounded-none sm:rounded-sm overflow-hidden shadow-md bg-white border border-slate-200 aspect-[16/10] sm:aspect-[16/11]">
+                          <ImageWithSkeleton
+                            src={milestone.image}
+                            alt={milestone.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-transparent z-10" />
+
+                          {/* Top Tag Badge */}
+                          <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-md px-3 py-1 text-brand-primary text-[10px] sm:text-[11px] font-label font-bold tracking-wider uppercase border border-white/80">
+                            <span>{milestone.tag}</span>
+                          </div>
+
+                          {/* Top Metric Counter Pill */}
+                          <div className="absolute top-4 right-4 z-20 bg-slate-900/85 backdrop-blur-md px-3 py-1 text-white text-[10px] sm:text-[11px] font-headline font-bold flex items-center gap-1.5 border border-white/20">
+                            <span className="text-sky-300 font-extrabold">{milestone.metricValue}</span>
+                            <span className="text-[9px] text-slate-300 uppercase tracking-wider font-label">{milestone.metricLabel}</span>
+                          </div>
+
+                          {/* Bottom Floating Bar */}
+                          <div className="absolute bottom-3 inset-x-3 z-20 bg-white/95 backdrop-blur-md border border-slate-200/80 px-4 py-2 flex items-center justify-between">
+                            <span className="font-label font-bold text-xs text-slate-900 tracking-wider uppercase truncate">
+                              {milestone.floatingText}
+                            </span>
+                            <span className="font-label text-[10px] font-extrabold text-brand-primary uppercase tracking-widest shrink-0 ml-2">
                               EST. {milestone.year}
                             </span>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </ScrollReveal>
+                    </ScrollReveal>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

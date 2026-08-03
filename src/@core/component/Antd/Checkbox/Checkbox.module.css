@@ -1,0 +1,12 @@
+.gCheckbox {
+  font-family: var(--font-body, sans-serif);
+}
+
+.gCheckbox :global(.ant-checkbox-checked .ant-checkbox-inner) {
+  background-color: var(--brand-primary, #0ea5e9) !important;
+  border-color: var(--brand-primary, #0ea5e9) !important;
+}
+
+.gCheckbox :global(.ant-checkbox-hover .ant-checkbox-inner) {
+  border-color: var(--brand-primary, #0ea5e9) !important;
+}

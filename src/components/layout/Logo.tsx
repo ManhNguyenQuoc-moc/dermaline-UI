@@ -9,9 +9,9 @@ export interface LogoProps {
 }
 
 export default function Logo({
-  className = 'h-12',
+  className = 'h-11 sm:h-14 lg:h-16 w-auto',
   rotate = 'rotate-90',
-  scale = 'scale-[3.8]',
+  scale = 'scale-[3.4] sm:scale-[4.0] lg:scale-[4.8]',
 }: LogoProps) {
   return (
     <div className="relative inline-flex items-center justify-start overflow-visible p-0">
