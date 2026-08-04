@@ -19,9 +19,8 @@ interface ByBrandSlugPageProps {
 export default function ByBrandSlugPage({ params }: ByBrandSlugPageProps) {
   const router = useRouter();
   const resolvedParams = use(params);
-  const initialSlug = resolvedParams.slug || 'all';
+  const currentSlug = resolvedParams.slug || 'all';
 
-  const [selectedBrandSlug, setSelectedBrandSlug] = useState<string>(initialSlug);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-low' | 'price-high' | 'rating'>('featured');
@@ -37,52 +36,41 @@ export default function ByBrandSlugPage({ params }: ByBrandSlugPageProps) {
 
   const PRICE_RANGES = ['All', 'Under $50', '$50 - $100', 'Over $100'];
 
-  // Keep state synced with route parameter changes
-  useEffect(() => {
-    if (resolvedParams.slug) {
-      setSelectedBrandSlug(resolvedParams.slug);
-      setPage(1);
-    }
-  }, [resolvedParams.slug]);
-
-  const handleBrandSlugChange = (slug: string) => {
-    setSelectedBrandSlug(slug);
-    setPage(1);
-    router.push(`/by-brand/${slug}`);
-  };
-
   const activeCategoryObj = useMemo(() => {
     return (
-      BY_BRAND_CATEGORIES.find((cat) => cat.slug === selectedBrandSlug) ||
+      BY_BRAND_CATEGORIES.find((cat) => cat.slug === currentSlug) ||
       BY_BRAND_CATEGORIES[0]
     );
-  }, [selectedBrandSlug]);
+  }, [currentSlug]);
 
   const fetchProducts = useCallback(async () => {
     const res = await getProductsService({
       page,
       pageSize,
       search: searchQuery,
-      brandSlug: selectedBrandSlug,
+      brandSlug: currentSlug,
       priceRange: selectedPriceRange,
       sortBy,
     });
     setProductData(res);
-  }, [page, pageSize, searchQuery, selectedBrandSlug, selectedPriceRange, sortBy]);
+  }, [page, pageSize, searchQuery, currentSlug, selectedPriceRange, sortBy]);
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
   const hasActiveFilters = Boolean(
-    searchQuery || selectedPriceRange !== 'All' || (selectedBrandSlug !== 'all' && selectedBrandSlug !== '')
+    searchQuery || selectedPriceRange !== 'All' || (currentSlug !== 'all' && currentSlug !== '')
   );
 
   const resetAllFilters = () => {
     setSearchQuery('');
     setSelectedPriceRange('All');
     setSortBy('featured');
-    handleBrandSlugChange('all');
+    setPage(1);
+    if (currentSlug !== 'all') {
+      router.push('/by-brand/all', { scroll: false });
+    }
   };
 
   return (
@@ -100,8 +88,8 @@ export default function ByBrandSlugPage({ params }: ByBrandSlugPageProps) {
       <ByBrandFilterBar
         searchQuery={searchQuery}
         setSearchQuery={(q) => { setSearchQuery(q); setPage(1); }}
-        selectedBrandSlug={selectedBrandSlug}
-        setSelectedBrandSlug={handleBrandSlugChange}
+        selectedBrandSlug={currentSlug}
+        setSelectedBrandSlug={(slug) => router.push(`/by-brand/${slug}`, { scroll: false })}
         selectedPriceRange={selectedPriceRange}
         setSelectedPriceRange={(p) => { setSelectedPriceRange(p); setPage(1); }}
         sortBy={sortBy}

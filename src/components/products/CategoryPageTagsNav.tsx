@@ -32,6 +32,7 @@ export default function CategoryPageTagsNav() {
               <Link
                 key={item.href}
                 href={item.href}
+                scroll={false}
                 className={`font-label text-xs sm:text-sm font-bold tracking-wider transition-all duration-200 py-1 shrink-0 ${
                   isActive
                     ? 'text-brand-primary border-b-2 border-brand-primary font-extrabold'

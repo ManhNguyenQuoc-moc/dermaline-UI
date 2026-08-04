@@ -21,7 +21,7 @@ const OFFICIAL_CERTIFICATES: CertificateItem[] = [
     title: 'EN ISO 13485:2016',
     subtitle: 'Medical Devices Quality Management System',
     category: 'ISO',
-    image: 'https://en.dermaline.co.kr/web/upload/category/editor/2024/12/02/9525cceae1c70e30eb49a888bdf218cf.jpg',
+    image: 'https://en.dermaline.co.kr/web/upload/category/editor/2024/12/02/079dd8271e254aaebd582633c48049c5.jpg',
   },
   {
     id: 'cert-2',

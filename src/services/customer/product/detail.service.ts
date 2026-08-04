@@ -31,8 +31,8 @@ export async function getProductDetailService(idOrSlug: string): Promise<Product
   const galleryImages = [
     product.image,
     product.hoverImage || product.image,
-    'https://en.dermaline.co.kr/web/product/extra/small/202606/17dd930a4a8e74092b10265b49ea8c26.jpg',
-    'https://en.dermaline.co.kr/web/product/extra/small/202606/9a3ea82cfcaf92ea8c1a97479826e1b9.jpg',
+    'https://en.dermaline.co.kr/web/upload/category/editor/2024/12/02/9525cceae1c70e30eb49a888bdf218cf.jpg',
+    'https://en.dermaline.co.kr/web/upload/category/editor/2024/12/02/5f242db1ebf22a5789f28d82d92bb3ee.jpg',
   ];
 
   const frequentlyBoughtTogether = MOCK_PRODUCTS.filter(

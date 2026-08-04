@@ -1,6 +1,6 @@
 import { PaginationResponse } from '@/@core/models/pagination.model';
-import { CommunityArticleItem, CommunityFilterParams } from './models/community.model';
-import { MOCK_COMMUNITY_ARTICLES } from './community.mock';
+import { CommunityArticleItem, CommunityFilterParams, RealCustomerShowcaseItem } from './models/community.model';
+import { MOCK_COMMUNITY_ARTICLES, MOCK_REAL_CUSTOMER_SHOWCASE } from './community.mock';
 
 export * from './models/community.model';
 export * from './community.mock';
@@ -72,4 +72,15 @@ export async function getRelatedArticlesService(
   return MOCK_COMMUNITY_ARTICLES.filter(
     (a) => a.slug.toLowerCase() !== currentSlug.toLowerCase() && a.id.toLowerCase() !== currentSlug.toLowerCase()
   ).slice(0, limit);
+}
+
+export async function getRealCustomerShowcaseService(
+  categoryTag: string = 'all'
+): Promise<RealCustomerShowcaseItem[]> {
+  if (categoryTag === 'all' || !categoryTag) {
+    return MOCK_REAL_CUSTOMER_SHOWCASE;
+  }
+  return MOCK_REAL_CUSTOMER_SHOWCASE.filter(
+    (item) => item.categoryTag === categoryTag
+  );
 }

@@ -39,7 +39,7 @@ export default function EventFilterBar({
   ];
 
   return (
-    <section className="sticky top-16 z-30 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/90 py-3 shadow-xs select-none">
+    <section className="sticky top-16 z-30 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/90 py-3 shadow-2xs select-none">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           {/* Search Input Bar */}
@@ -49,7 +49,7 @@ export default function EventFilterBar({
               placeholder="Search event products or special offers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-11 px-4 text-xs sm:text-sm font-body border border-slate-300 focus:border-brand-primary focus:outline-none rounded-none sm:rounded-sm bg-slate-50/50 text-slate-900 transition-colors"
+              className="w-full h-11 px-4 text-xs sm:text-sm font-body border border-slate-300 focus:border-brand-primary focus:outline-none rounded-xl bg-slate-50/50 text-slate-900 transition-colors"
             />
             {searchQuery && (
               <button
@@ -84,7 +84,7 @@ export default function EventFilterBar({
               <button
                 type="button"
                 onClick={resetAllFilters}
-                className="h-11 px-4 text-xs font-label font-bold text-red-600 hover:bg-red-50 border border-red-200 rounded-none sm:rounded-sm transition-colors uppercase tracking-wider cursor-pointer"
+                className="h-11 px-4 text-xs font-label font-bold text-red-600 hover:bg-red-50 border border-red-200 rounded-xl transition-colors uppercase tracking-wider cursor-pointer"
               >
                 CLEAR ALL FILTERS
               </button>

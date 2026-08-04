@@ -3,6 +3,8 @@
 import React from 'react';
 import GSelect from '@/@core/component/Antd/Select';
 
+import Link from 'next/link';
+
 export const BY_TYPE_CATEGORIES = [
   { id: 'all', label: 'All Types', slug: 'all' },
   { id: 'cleansing', label: 'Cleansing', slug: 'cleansing' },
@@ -108,10 +110,10 @@ export default function TypeFilterBar({
 
         <div className="flex flex-wrap items-center gap-2 pt-3 pb-1 border-t border-slate-100 mt-3">
           {BY_TYPE_CATEGORIES.map((cat) => (
-            <button
+            <Link
               key={cat.slug}
-              type="button"
-              onClick={() => setSelectedTypeSlug(cat.slug)}
+              href={`/type/${cat.slug}`}
+              scroll={false}
               className={`px-3.5 py-1.5 text-xs font-label font-bold uppercase tracking-wider transition-all rounded-none sm:rounded-sm cursor-pointer ${
                 selectedTypeSlug === cat.slug
                   ? 'bg-slate-900 text-white shadow-xs'
@@ -119,7 +121,7 @@ export default function TypeFilterBar({
               }`}
             >
               {cat.label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>

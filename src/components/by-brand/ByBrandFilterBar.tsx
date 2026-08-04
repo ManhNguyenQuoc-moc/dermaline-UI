@@ -3,6 +3,8 @@
 import React from 'react';
 import GSelect from '@/@core/component/Antd/Select';
 
+import Link from 'next/link';
+
 export const BY_BRAND_CATEGORIES = [
   { id: 'all', label: 'All Brands', slug: 'all' },
   { id: 'dermaline', label: 'DERMALINE', slug: 'dermaline' },
@@ -106,10 +108,10 @@ export default function ByBrandFilterBar({
         {/* 3 Brand Tags Row (Wrapping to next line) */}
         <div className="flex flex-wrap items-center gap-2 pt-3 pb-1 border-t border-slate-100 mt-3">
           {BY_BRAND_CATEGORIES.map((cat) => (
-            <button
+            <Link
               key={cat.slug}
-              type="button"
-              onClick={() => setSelectedBrandSlug(cat.slug)}
+              href={`/by-brand/${cat.slug}`}
+              scroll={false}
               className={`px-3.5 py-1.5 text-xs font-label font-bold uppercase tracking-wider transition-all rounded-none sm:rounded-sm cursor-pointer ${
                 selectedBrandSlug === cat.slug
                   ? 'bg-slate-900 text-white shadow-xs'
@@ -117,7 +119,7 @@ export default function ByBrandFilterBar({
               }`}
             >
               {cat.label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>

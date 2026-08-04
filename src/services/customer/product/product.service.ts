@@ -106,3 +106,22 @@ export async function getProductsService(params: ProductFilterParams = {}): Prom
     pageSize,
   };
 }
+
+/**
+ * Standardized Single Source of Truth helper for grouped clinical event products.
+ * Pulls directly from MOCK_PRODUCTS so event items are 100% synchronized across components.
+ */
+export function getEventGroupedProductsService(): Record<number, ProductItem[]> {
+  const eventProducts = ALL_PRODUCTS.filter((p) => p.isEvent);
+  
+  // Ensure we have at least 3 items per event group by looping if needed
+  const group0 = eventProducts.slice(0, 3);
+  const group1 = eventProducts.slice(3, 6).length >= 3 ? eventProducts.slice(3, 6) : eventProducts.slice(0, 3);
+  const group2 = eventProducts.slice(6, 9).length >= 3 ? eventProducts.slice(6, 9) : eventProducts.slice(2, 5);
+
+  return {
+    0: group0,
+    1: group1,
+    2: group2,
+  };
+}

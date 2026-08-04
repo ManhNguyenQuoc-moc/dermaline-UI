@@ -4,9 +4,12 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import CommunityHero from '@/components/community/CommunityHero';
 import CommunityFilterBar, { COMMUNITY_CATEGORIES } from '@/components/community/CommunityFilterBar';
 import CommunityGrid from '@/components/community/CommunityGrid';
+import RealCustomerShowcase from '@/components/community/RealCustomerShowcase';
 import {
   getCommunityArticlesService,
+  getRealCustomerShowcaseService,
   CommunityArticleItem,
+  RealCustomerShowcaseItem,
 } from '@/services/customer/community/community.service';
 import { PaginationResponse } from '@/@core/models/pagination.model';
 
@@ -15,6 +18,7 @@ export default function CommunityListingPage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(6);
+  const [customerCases, setCustomerCases] = useState<RealCustomerShowcaseItem[]>([]);
 
   const [articleData, setArticleData] = useState<PaginationResponse<CommunityArticleItem>>({
     data: [],
@@ -40,9 +44,15 @@ export default function CommunityListingPage() {
     setArticleData(res);
   }, [page, pageSize, searchQuery, selectedCategorySlug]);
 
+  const fetchCustomerCases = useCallback(async () => {
+    const cases = await getRealCustomerShowcaseService('all');
+    setCustomerCases(cases);
+  }, []);
+
   useEffect(() => {
     fetchArticles();
-  }, [fetchArticles]);
+    fetchCustomerCases();
+  }, [fetchArticles, fetchCustomerCases]);
 
   const hasActiveFilters = Boolean(
     searchQuery || selectedCategorySlug !== 'all'
@@ -60,7 +70,7 @@ export default function CommunityListingPage() {
       <CommunityHero
         activeCategoryTitle={
           selectedCategorySlug === 'all'
-            ? 'News & Clinical FAQ Hub'
+            ? 'News, FAQ & Real Customer Proof'
             : activeCategoryObj.label
         }
         totalCount={articleData.total}
@@ -88,6 +98,13 @@ export default function CommunityListingPage() {
           if (ps) setPageSize(ps);
         }}
         resetAllFilters={resetAllFilters}
+      />
+
+      {/* 4. Real Customer Before/After Showcase Section */}
+      <RealCustomerShowcase
+        cases={customerCases}
+        title="Trưng Bày Kết Quả Phục Hồi Thực Tế Của Khách Hàng"
+        subtitle="Hình ảnh và đánh giá thực tế từ khách hàng & bệnh nhân tại các phòng khám da liễu và sau liệu trình điều trị với Dermaline."
       />
     </main>
   );

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import ScrollReveal from '@/components/common/ScrollReveal';
+import GSelect from '@/@core/component/Antd/Select';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, Building2 } from 'lucide-react';
 
 export default function ContactUsPage() {
@@ -29,6 +30,13 @@ export default function ContactUsPage() {
       });
     }, 4000);
   };
+
+  const subjectOptions = [
+    { label: 'General Product Inquiry', value: 'General Inquiry' },
+    { label: 'B2B Clinic / Salon Distribution', value: 'B2B Salon Distribution' },
+    { label: 'Salmon PDRN Formulation Consultation', value: 'Salmon PDRN Consultation' },
+    { label: 'International Export Partnership', value: 'International Export' },
+  ];
 
   return (
     <main className="w-full min-h-screen bg-white select-none pt-24 sm:pt-28 pb-20">
@@ -227,16 +235,12 @@ export default function ContactUsPage() {
                         <label className="font-label text-xs font-bold text-slate-700 uppercase tracking-wider block">
                           Inquiry Subject
                         </label>
-                        <select
+                        <GSelect
                           value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="w-full h-11 px-4 text-xs sm:text-sm font-body border border-slate-300 focus:border-brand-primary focus:outline-none rounded-none sm:rounded-sm bg-slate-50/50 text-slate-900"
-                        >
-                          <option value="General Inquiry">General Product Inquiry</option>
-                          <option value="B2B Salon Distribution">B2B Clinic / Salon Distribution</option>
-                          <option value="Salmon PDRN Consultation">Salmon PDRN Formulation Consultation</option>
-                          <option value="International Export">International Export Partnership</option>
-                        </select>
+                          onChange={(val) => setFormData({ ...formData, subject: val as string })}
+                          options={subjectOptions}
+                          className="w-full"
+                        />
                       </div>
                     </div>
 

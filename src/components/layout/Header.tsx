@@ -53,11 +53,6 @@ export default function Header() {
     {
       label: t.header.brand,
       href: '/brand/story',
-      hasDropdown: true,
-      rawDropdownItems: [
-        { key: 'b1', label: t.header.brandStory, href: '/brand/story' },
-        { key: 'b2', label: t.header.contactUs, href: '/brand/contact' },
-      ],
     },
     {
       label: t.header.allProducts,
@@ -120,6 +115,7 @@ export default function Header() {
         { key: 'c2', label: t.header.faqSupport, href: '/community/faq' },
       ],
     },
+    { label: t.header.contactUs, href: '/brand/contact' },
   ];
 
   useEffect(() => {
@@ -379,11 +375,12 @@ export default function Header() {
                 } else if (item.href === '/products') {
                   const productRoutes = ['/products', '/lines', '/type', '/specialty', '/by-brand'];
                   isActive = productRoutes.some((route) => pathname.startsWith(route));
+                } else if (item.href === '/brand/contact') {
+                  isActive = pathname === '/brand/contact' || pathname.startsWith('/brand/contact') || pathname === '/contact';
+                } else if (item.href === '/brand/story') {
+                  isActive = pathname === '/brand/story' || (pathname.startsWith('/brand') && !pathname.startsWith('/brand/contact'));
                 } else {
-                  const baseRoute = item.href.split('/')[1];
-                  isActive =
-                    pathname === item.href ||
-                    (Boolean(baseRoute) && pathname.startsWith(`/${baseRoute}`));
+                  isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
                 }
 
                 if (item.hasDropdown && item.rawDropdownItems) {

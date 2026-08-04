@@ -20,7 +20,7 @@ export interface ImageWithSkeletonProps {
 }
 
 const DEFAULT_FALLBACK_IMAGE =
-  'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80';
+  'https://en.dermaline.co.kr/web/upload/category/editor/2024/12/02/9f3e225d8efe11d4977e6a1af0a1e1dc.jpg';
 
 export default function ImageWithSkeleton({
   src,
@@ -39,15 +39,18 @@ export default function ImageWithSkeleton({
   ...props
 }: ImageWithSkeletonProps) {
   const [imgSrc, setImgSrc] = useState<string>(src || DEFAULT_FALLBACK_IMAGE);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     if (src) {
       setImgSrc(src);
+      setHasError(false);
     }
   }, [src]);
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    if (imgSrc !== fallbackSrc) {
+    if (!hasError) {
+      setHasError(true);
       setImgSrc(fallbackSrc);
     }
     onError?.(e);

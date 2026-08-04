@@ -1,11 +1,13 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 export const COMMUNITY_CATEGORIES = [
-  { id: 'all', label: 'All Articles', slug: 'all' },
-  { id: 'news', label: 'News', slug: 'news' },
-  { id: 'faq', label: 'FAQ', slug: 'faq' },
+  { id: 'all', label: 'All Community', slug: 'all', href: '/community' },
+  { id: 'news', label: 'Clinical News', slug: 'news', href: '/community/news' },
+  { id: 'faq', label: 'Dermatology FAQ', slug: 'faq', href: '/community/faq' },
+  { id: 'gallery', label: 'Real Customer Results', slug: 'gallery', href: '/community/gallery' },
 ];
 
 interface CommunityFilterBarProps {
@@ -33,7 +35,7 @@ export default function CommunityFilterBar({
           <div className="relative flex-1 max-w-md">
             <input
               type="text"
-              placeholder="Search news, FAQs or clinical guidelines..."
+              placeholder="Search news, clinical FAQs, or customer results..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-11 px-4 text-xs sm:text-sm font-body border border-slate-300 focus:border-brand-primary focus:outline-none rounded-none sm:rounded-sm bg-slate-50/50 text-slate-900 transition-colors"
@@ -60,13 +62,13 @@ export default function CommunityFilterBar({
           )}
         </div>
 
-        {/* Category Tabs Row (News & FAQ) */}
+        {/* Category Link Tabs (News, FAQ, Real Customer Results) */}
         <div className="flex flex-wrap items-center gap-2 pt-3 pb-1 border-t border-slate-100 mt-3">
           {COMMUNITY_CATEGORIES.map((cat) => (
-            <button
+            <Link
               key={cat.slug}
-              type="button"
-              onClick={() => setSelectedCategorySlug(cat.slug)}
+              href={cat.href}
+              scroll={false}
               className={`px-4 py-1.5 text-xs font-label font-bold uppercase tracking-wider transition-all rounded-none sm:rounded-sm cursor-pointer ${
                 selectedCategorySlug === cat.slug
                   ? 'bg-slate-900 text-white shadow-xs'
@@ -74,7 +76,7 @@ export default function CommunityFilterBar({
               }`}
             >
               {cat.label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>

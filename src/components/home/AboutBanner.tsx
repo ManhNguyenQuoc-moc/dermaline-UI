@@ -89,7 +89,7 @@ export default function AboutBanner({ data }: AboutBannerProps) {
   const activeSlide = ABOUT_SLIDES[currentSlide];
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-white via-sky-50/40 to-white py-36 sm:py-40 lg:py-44 overflow-hidden border-b border-slate-200/60 select-none">
+    <section className="relative w-full bg-gradient-to-b from-white via-sky-50/40 to-white py-16 sm:py-20 lg:py-24 overflow-hidden border-b border-slate-200/60 select-none">
       {/* Background Soft Studio Ambient Glow */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[550px] h-[550px] bg-brand-primary/15 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-[550px] h-[550px] bg-sky-200/35 rounded-full blur-[160px] pointer-events-none" />
@@ -155,7 +155,7 @@ export default function AboutBanner({ data }: AboutBannerProps) {
 
           {/* Right Column: Generous Offset & Breathing Room */}
           <div
-            className="lg:col-span-6 relative w-full pt-2 pb-14 pl-2 sm:pl-8 lg:pl-12"
+            className="lg:col-span-6 relative w-full pt-2 pb-6 pl-2 sm:pl-8 lg:pl-12"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -168,7 +168,7 @@ export default function AboutBanner({ data }: AboutBannerProps) {
                 }`}
               >
                 {/* Main Image Frame */}
-                <div className="relative rounded-tl-2xl rounded-tr-[52px] sm:rounded-tr-[72px] rounded-br-2xl rounded-bl-[52px] sm:rounded-bl-[72px] overflow-hidden shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.18)] bg-white border border-slate-200/80 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] group max-h-[540px] transition-all duration-500 hover:shadow-3xl">
+                <div className="relative rounded-tl-2xl rounded-tr-[52px] sm:rounded-tr-[72px] rounded-br-2xl rounded-bl-[52px] sm:rounded-bl-[72px] overflow-hidden shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.18)] bg-white border border-slate-200/80 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] group max-h-[460px] transition-all duration-500 hover:shadow-3xl">
                   <img
                     src={activeSlide.image}
                     alt={activeSlide.floatingTitle}

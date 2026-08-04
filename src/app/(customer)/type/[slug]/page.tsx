@@ -19,9 +19,8 @@ interface TypeSlugPageProps {
 export default function TypeSlugPage({ params }: TypeSlugPageProps) {
   const router = useRouter();
   const resolvedParams = use(params);
-  const initialSlug = resolvedParams.slug || 'all';
+  const currentSlug = resolvedParams.slug || 'all';
 
-  const [selectedTypeSlug, setSelectedTypeSlug] = useState<string>(initialSlug);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-low' | 'price-high' | 'rating'>('featured');
@@ -37,52 +36,41 @@ export default function TypeSlugPage({ params }: TypeSlugPageProps) {
 
   const PRICE_RANGES = ['All', 'Under $50', '$50 - $100', 'Over $100'];
 
-  // Keep state synced with route parameter changes
-  useEffect(() => {
-    if (resolvedParams.slug) {
-      setSelectedTypeSlug(resolvedParams.slug);
-      setPage(1);
-    }
-  }, [resolvedParams.slug]);
-
-  const handleTypeSlugChange = (slug: string) => {
-    setSelectedTypeSlug(slug);
-    setPage(1);
-    router.push(`/type/${slug}`);
-  };
-
   const activeCategoryObj = useMemo(() => {
     return (
-      BY_TYPE_CATEGORIES.find((cat) => cat.slug === selectedTypeSlug) ||
+      BY_TYPE_CATEGORIES.find((cat) => cat.slug === currentSlug) ||
       BY_TYPE_CATEGORIES[0]
     );
-  }, [selectedTypeSlug]);
+  }, [currentSlug]);
 
   const fetchProducts = useCallback(async () => {
     const res = await getProductsService({
       page,
       pageSize,
       search: searchQuery,
-      typeSlug: selectedTypeSlug,
+      typeSlug: currentSlug,
       priceRange: selectedPriceRange,
       sortBy,
     });
     setProductData(res);
-  }, [page, pageSize, searchQuery, selectedTypeSlug, selectedPriceRange, sortBy]);
+  }, [page, pageSize, searchQuery, currentSlug, selectedPriceRange, sortBy]);
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
   const hasActiveFilters = Boolean(
-    searchQuery || selectedPriceRange !== 'All' || (selectedTypeSlug !== 'all' && selectedTypeSlug !== '')
+    searchQuery || selectedPriceRange !== 'All' || (currentSlug !== 'all' && currentSlug !== '')
   );
 
   const resetAllFilters = () => {
     setSearchQuery('');
     setSelectedPriceRange('All');
     setSortBy('featured');
-    handleTypeSlugChange('all');
+    setPage(1);
+    if (currentSlug !== 'all') {
+      router.push('/type/all', { scroll: false });
+    }
   };
 
   return (
@@ -100,8 +88,8 @@ export default function TypeSlugPage({ params }: TypeSlugPageProps) {
       <TypeFilterBar
         searchQuery={searchQuery}
         setSearchQuery={(q) => { setSearchQuery(q); setPage(1); }}
-        selectedTypeSlug={selectedTypeSlug}
-        setSelectedTypeSlug={handleTypeSlugChange}
+        selectedTypeSlug={currentSlug}
+        setSelectedTypeSlug={(slug) => router.push(`/type/${slug}`, { scroll: false })}
         selectedPriceRange={selectedPriceRange}
         setSelectedPriceRange={(p) => { setSelectedPriceRange(p); setPage(1); }}
         sortBy={sortBy}

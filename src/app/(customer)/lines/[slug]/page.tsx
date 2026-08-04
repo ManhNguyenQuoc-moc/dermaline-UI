@@ -19,9 +19,8 @@ interface LineSlugPageProps {
 export default function LineSlugPage({ params }: LineSlugPageProps) {
   const router = useRouter();
   const resolvedParams = use(params);
-  const initialSlug = resolvedParams.slug || 'all';
+  const currentSlug = resolvedParams.slug || 'all';
 
-  const [selectedLineSlug, setSelectedLineSlug] = useState<string>(initialSlug);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>('All');
   const [sortBy, setSortBy] = useState<'featured' | 'price-low' | 'price-high' | 'rating'>('featured');
@@ -37,52 +36,41 @@ export default function LineSlugPage({ params }: LineSlugPageProps) {
 
   const PRICE_RANGES = ['All', 'Under $50', '$50 - $100', 'Over $100'];
 
-  // Keep state synced with route parameter changes
-  useEffect(() => {
-    if (resolvedParams.slug) {
-      setSelectedLineSlug(resolvedParams.slug);
-      setPage(1);
-    }
-  }, [resolvedParams.slug]);
-
-  const handleLineSlugChange = (slug: string) => {
-    setSelectedLineSlug(slug);
-    setPage(1);
-    router.push(`/lines/${slug}`);
-  };
-
   const activeCategoryObj = useMemo(() => {
     return (
-      LINE_BY_LINE_CATEGORIES.find((cat) => cat.slug === selectedLineSlug) ||
+      LINE_BY_LINE_CATEGORIES.find((cat) => cat.slug === currentSlug) ||
       LINE_BY_LINE_CATEGORIES[0]
     );
-  }, [selectedLineSlug]);
+  }, [currentSlug]);
 
   const fetchProducts = useCallback(async () => {
     const res = await getProductsService({
       page,
       pageSize,
       search: searchQuery,
-      lineSlug: selectedLineSlug,
+      lineSlug: currentSlug,
       priceRange: selectedPriceRange,
       sortBy,
     });
     setProductData(res);
-  }, [page, pageSize, searchQuery, selectedLineSlug, selectedPriceRange, sortBy]);
+  }, [page, pageSize, searchQuery, currentSlug, selectedPriceRange, sortBy]);
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
   const hasActiveFilters = Boolean(
-    searchQuery || selectedPriceRange !== 'All' || (selectedLineSlug !== 'all' && selectedLineSlug !== '')
+    searchQuery || selectedPriceRange !== 'All' || (currentSlug !== 'all' && currentSlug !== '')
   );
 
   const resetAllFilters = () => {
     setSearchQuery('');
     setSelectedPriceRange('All');
     setSortBy('featured');
-    handleLineSlugChange('all');
+    setPage(1);
+    if (currentSlug !== 'all') {
+      router.push('/lines/all', { scroll: false });
+    }
   };
 
   return (
@@ -100,8 +88,8 @@ export default function LineSlugPage({ params }: LineSlugPageProps) {
       <LinesFilterBar
         searchQuery={searchQuery}
         setSearchQuery={(q) => { setSearchQuery(q); setPage(1); }}
-        selectedLineSlug={selectedLineSlug}
-        setSelectedLineSlug={handleLineSlugChange}
+        selectedLineSlug={currentSlug}
+        setSelectedLineSlug={(slug) => router.push(`/lines/${slug}`, { scroll: false })}
         selectedPriceRange={selectedPriceRange}
         setSelectedPriceRange={(p) => { setSelectedPriceRange(p); setPage(1); }}
         sortBy={sortBy}

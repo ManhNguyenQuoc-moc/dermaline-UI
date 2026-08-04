@@ -3,6 +3,8 @@
 import React from 'react';
 import GSelect from '@/@core/component/Antd/Select';
 
+import Link from 'next/link';
+
 export const LINE_BY_LINE_CATEGORIES = [
   { id: 'all', label: 'All Lines', slug: 'all' },
   { id: 'cleansing', label: 'Cleansing', slug: 'cleansing' },
@@ -113,10 +115,10 @@ export default function LinesFilterBar({
         {/* 8 Official Dermaline Line By Line Subcategory Tags Row (Wrapping to next line, zero horizontal scrollbar) */}
         <div className="flex flex-wrap items-center gap-2 pt-3 pb-1 border-t border-slate-100 mt-3">
           {LINE_BY_LINE_CATEGORIES.map((cat) => (
-            <button
+            <Link
               key={cat.slug}
-              type="button"
-              onClick={() => setSelectedLineSlug(cat.slug)}
+              href={`/lines/${cat.slug}`}
+              scroll={false}
               className={`px-3.5 py-1.5 text-xs font-label font-bold uppercase tracking-wider transition-all rounded-none sm:rounded-sm cursor-pointer ${
                 selectedLineSlug === cat.slug
                   ? 'bg-slate-900 text-white shadow-xs'
@@ -124,7 +126,7 @@ export default function LinesFilterBar({
               }`}
             >
               {cat.label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>

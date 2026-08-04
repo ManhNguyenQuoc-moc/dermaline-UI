@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroBanner from '@/components/home/HeroBanner';
+import EventCountdownSection from '@/components/home/EventCountdownSection';
 import AboutBanner from '@/components/home/AboutBanner';
 import InnovatorsBento from '@/components/home/InnovatorsBento';
 import BrandVideoShowcase from '@/components/home/BrandVideoShowcase';
@@ -13,28 +14,31 @@ export default function CustomerHomePage() {
 
   return (
     <main className="w-full min-h-screen overflow-x-hidden">
-      {/* 1. Hero Banner Section (Includes Soft Studio Organic Wave Arc Transition at top & bottom) */}
+      {/* 1. Hero Banner Section */}
       <HeroBanner data={data.hero} />
 
-      {/* 2. About Dermaline Section */}
+      {/* 2. Event Countdown Section (Positioned directly below Hero) */}
+      <EventCountdownSection />
+
+      {/* 3. About Dermaline Section */}
       <AboutBanner data={data.about} />
 
       {/* Transition 2: Silky Ribbon Wave with Clinical R&D Stamp Badge */}
       <SectionDivider mode="silk-stamp" stampText="DERMALINE MEDICAL AESTHETICS R&D" />
 
-      {/* 3. Top 3 Best Seller Skincare Bento Grid Section */}
+      {/* 4. Top 3 Best Seller Skincare Bento Grid Section */}
       <InnovatorsBento innovators={data.innovators} />
 
       {/* Transition 3: Multi-Layered Silky Flowing Wave Ribbon */}
       <SectionDivider mode="silk-flow" />
 
-      {/* 4. Brand Video Showcase Section (Figma Node 6:113) */}
+      {/* 5. Brand Video Showcase Section */}
       <BrandVideoShowcase />
 
-      {/* 5. Product Collection Grid Section (3 Columns x 3 Rows = 9 Product Cards) */}
+      {/* 6. Product Collection Grid Section */}
       <ProductGridSection products={data.products} />
 
-      {/* 6. 2026 Modern Recommendation Section (Clinical Skincare Routine Selection) */}
+      {/* 7. Modern Recommendation Section */}
       <RecommendationSection recommendations={data.recommendations} />
     </main>
   );
